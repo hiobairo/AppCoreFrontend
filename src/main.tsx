@@ -6,8 +6,6 @@ import es from './locale/lang/es.ts';
 import ApplicationContainer from './ApplicationContainer.tsx';
 import { configStore } from '@hiobairo/app-core';
 
-console.log('asd')
-
 const workflowsConfig: AppContainerConfig = {
   hostApi: BACKEND_NET_API_BASE_URL,
   defaultLanguage: configStore.getState().config.defaultLanguage,
