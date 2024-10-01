@@ -1,10 +1,9 @@
-import { AppContainerConfig, Launcher } from '@hiobairo/app-core';
+import { AppContainerConfig, Launcher, configStore } from '@hiobairo/app-core';
 import { modules } from '../module.config.ts';
 import { BACKEND_NET_API_BASE_URL } from './config';
 import en from './locale/lang/en.ts';
 import es from './locale/lang/es.ts';
 import ApplicationContainer from './ApplicationContainer.tsx';
-import { configStore } from '@hiobairo/app-core';
 
 const workflowsConfig: AppContainerConfig = {
   hostApi: BACKEND_NET_API_BASE_URL,

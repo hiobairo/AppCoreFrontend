@@ -1,21 +1,19 @@
 import { useNavigate } from 'react-router-dom';
 import { Box, Card, FormControlLabel, Grid, List, ListItem, ListItemButton, ListItemText, Stack, Typography, TextField, Tab, Tabs, Divider, Switch } from '@mui/material';
 import { useEffect } from 'react';
-import { RoleClaimType, RoleType, checkValidPermission } from '@hiobairo/app-core';
+import { RoleClaimType, RoleType, checkValidPermission, localization, useObjectState } from '@hiobairo/app-core';
 import { useCreateRole, useEditRole, useRoles } from './api/roles';
 import BreadCrumbs from '../../components/breadcrumbs/BreadCrumbs';
-import { useObjectState } from '@hiobairo/app-core';
 import { SITE_NAME } from '../../config';
 import { DASHBOARD_ROUTES } from '../../routes';
 import TitleWithAddButton from '../../components/title-with-add-button/TitleWithAddButton';
 import React from 'react';
-import * as _ from 'lodash';
-import NoDataContent from '@hiobairo/app-core/src/components/no-data-content/NoDataContent';
+import _ from 'lodash';
+import NoDataContent from '../../components/no-data-content/NoDataContent';
 import ActionButtons from '../../components/action-buttons/ActionButtons';
 import { useActions } from './api/actions';
 import { permissions as permissionsForActions } from './constants';
 import Iconify from '../../components/iconify/Iconify';
-import { localization }  from '@hiobairo/app-core'
 import { uuidv4 } from '../../utils/global';
 
 export const metadata = { title: `Customers | Dashboard | ${SITE_NAME}` };

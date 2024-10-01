@@ -1,5 +1,5 @@
 import { ThemeProvider } from './contexts/theme/ThemeProvider.tsx';
-import {AppCoreContainer } from '@hiobairo/app-core';
+import { AppCoreContainer } from '@hiobairo/app-core';
 import App from './App.tsx';
 
 const ApplicationContainer = () => (
