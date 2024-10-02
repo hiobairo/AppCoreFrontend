@@ -76,8 +76,19 @@ export default function Permissions(): JSX.Element {
   const onUpdateRole = () => {
     if (selectedRole) {
       editRole({
-        id: null,
-        ...selectedRole,
+        id: selectedRole.id,
+        name: selectedRole.name,
+        active: selectedRole.active,
+        roleClaims: selectedRole.roleClaims.map((roleClaim: RoleClaimType) => ({
+          id: roleClaim.id,
+          permissionId: roleClaim.permission?.id,
+          roleId: selectedRole?.id,
+          actions: roleClaim.actions?.map((action) => ({
+            id: action.id,
+            actionId: action.action?.id,
+            permissionRoleId: action.permissionRole?.id,
+          })),
+        }))
       }).then(() => {
         refetch();
       });
