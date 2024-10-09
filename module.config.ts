@@ -21,4 +21,12 @@ export const modules: ModuleConfigItem[] = [
     name: 'SETTINGS',
     load: () => import('./src/modules/settings'),
   },
+  { 
+    name: 'NOTALLOWED',
+    load: () => import('./src/modules/not-allowed'),
+  },
+  { 
+    name: 'NOTFOUND',
+    load: () => import('./src/modules/not-found'),
+  },
 ];

@@ -3,6 +3,8 @@ export const DASHBOARD_ROUTES = {
   AUTH: {
     LOGIN: '/admin/auth/login',
   },
+  NOTALLOWED: '/admin/not-allowed',
+  NOTFOUND: '/admin/not-found',
   PERMISSIONS: {
     ROOT: '/admin/permissions',
     LIST: '/admin/permissions/list',

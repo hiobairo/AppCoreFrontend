@@ -18,6 +18,7 @@ import { formatDate } from '../../utils/global';
 import PromptModal from '../../components/prompt-modal/PromptModal';
 import { localization }  from '@hiobairo/app-core'
 import ChangePasswordForm from './ChangePasswordForm';
+import { PermissionGuard } from '../../guards/auth/PermissionGuard';
 
 export default function Users(): JSX.Element {
   const navigate = useNavigate();
@@ -63,7 +64,9 @@ export default function Users(): JSX.Element {
   }, [pagination, refetch])
 
   return (
-    <>
+    <PermissionGuard
+      permissions={[permissions.menu]}
+    >
       <PromptModal
         open={showDeleteConfirmationModal}
         onContinuePress={async () => {
@@ -96,7 +99,11 @@ export default function Users(): JSX.Element {
                 width: '40%',
               }}
             >
-              <UserForm />
+              <PermissionGuard
+                permissions={[permissions.edit]}
+              >
+                <UserForm />
+              </PermissionGuard>
             </AddEntityModalContainer>
           }
         />)}
@@ -112,7 +119,11 @@ export default function Users(): JSX.Element {
                 width: '40%',
               }}
             >
-              <UserForm />
+              <PermissionGuard
+                permissions={[permissions.create]}
+              >
+                <UserForm />
+              </PermissionGuard>
             </AddEntityModalContainer>
           }
         />)}
@@ -128,7 +139,12 @@ export default function Users(): JSX.Element {
                 height: 'auto'
               }}
             >
-              <ChangePasswordForm sx={{ pb: 2 }} />
+              <PermissionGuard
+                permissions={[permissions.changePassword]}
+              >
+                <ChangePasswordForm sx={{ pb: 2 }} />
+              </PermissionGuard>
+              
             </AddEntityModalContainer>
           }
         />)}
@@ -306,6 +322,6 @@ export default function Users(): JSX.Element {
           pagination={pagination}
         />
       </Card>
-    </>
+    </PermissionGuard>
   );
 }

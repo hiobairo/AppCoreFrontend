@@ -15,6 +15,7 @@ import { useActions } from './api/actions';
 import { permissions as permissionsForActions } from './constants';
 import Iconify from '../../components/iconify/Iconify';
 import { uuidv4 } from '../../utils/global';
+import { PermissionGuard } from '../../guards/auth/PermissionGuard';
 
 export const metadata = { title: `Customers | Dashboard | ${SITE_NAME}` };
 
@@ -96,7 +97,9 @@ export default function Permissions(): JSX.Element {
   }
 
   return (
-    <>
+    <PermissionGuard
+      permissions={[permissionsForActions.menu]}
+    >
       <BreadCrumbs
         items={[
           {
@@ -138,34 +141,39 @@ export default function Permissions(): JSX.Element {
               }}
             >
               {showCreateNewRoleForm && (
-              <Stack sx={{ width: '100%', p: 2 }}>
-                <Box>
-                  <TextField
-                    label={localization.localize('general.name')}
-                    fullWidth
-                    value={newRoleName}
-                    onChange={(e) => updateState({ newRoleName: e.target.value })}
-                  />
-                </Box>
-                <Box sx={{ mt: 1 }}>
-                  <TextField
-                    label={localization.localize('general.description')}
-                    fullWidth
-                    value={newRoleDescription}
-                    onChange={(e) => updateState({ newRoleDescription: e.target.value })}
-                  />
-                </Box>
-                <Box>
-                  <ActionButtons
-                    leftButtonTitle={localization.localize('general.cancel')}
-                    rightButtonTitle={localization.localize('general.create')}
-                    onLeftButtonPress={() => updateState({ showCreateNewRoleForm: false })}
-                    onRightButtonPress={onCreateNewRole}
-                    isLoading={isPending}
-                  />
-                </Box>
-                <Divider sx={{ mt: 2 }} />
-              </Stack>)}
+              <PermissionGuard
+                permissions={[permissionsForActions.create]}
+              >
+                <Stack sx={{ width: '100%', p: 2 }}>
+                  <Box>
+                    <TextField
+                      label={localization.localize('general.name')}
+                      fullWidth
+                      value={newRoleName}
+                      onChange={(e) => updateState({ newRoleName: e.target.value })}
+                    />
+                  </Box>
+                  <Box sx={{ mt: 1 }}>
+                    <TextField
+                      label={localization.localize('general.description')}
+                      fullWidth
+                      value={newRoleDescription}
+                      onChange={(e) => updateState({ newRoleDescription: e.target.value })}
+                    />
+                  </Box>
+                  <Box>
+                    <ActionButtons
+                      leftButtonTitle={localization.localize('general.cancel')}
+                      rightButtonTitle={localization.localize('general.create')}
+                      onLeftButtonPress={() => updateState({ showCreateNewRoleForm: false })}
+                      onRightButtonPress={onCreateNewRole}
+                      isLoading={isPending}
+                    />
+                  </Box>
+                  <Divider sx={{ mt: 2 }} />
+                </Stack>
+              </PermissionGuard>
+              )}
               {roles && roles.map(role => (
                 <ListItem key={role.id} sx={{ pt: 0, pb: 0 }}>
                   <ListItemButton
@@ -352,6 +360,6 @@ export default function Permissions(): JSX.Element {
           </Grid>
         </Grid>
       </Card>
-    </>
+    </PermissionGuard>
   );
 }
